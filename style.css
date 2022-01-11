@@ -26,10 +26,7 @@
 .keyContent {
    border-style: dashed;
    width: 100vw;
-   height: 300px;
    text-align: center;
-   /* display: block;  
-   justify-content: center;*/
 }
 
 .titleQuiz {
@@ -47,19 +44,37 @@
     min-width: 600px;
 }
 
-.quizStart {
+button {
     background-color: blueviolet;
     color: white;
 }
 
 .quiz {
   border-style: dotted;
-  margin-left: 30%;
-  margin-right: 30%;
+  width:500px;
+  margin-left: auto;
+  margin-right: auto;
   visibility: hidden;
 }
 
-li {
+.quiz li {
     list-style-type: none;
     text-align: left;
+}
+
+.getScore {
+    border-style: dotted;
+    text-align: left;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    visibility:hidden;
+}
+
+.highScores {
+    border-style: dotted;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    /*visibility:hidden;*/
 }

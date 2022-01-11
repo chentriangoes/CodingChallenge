@@ -55,7 +55,7 @@ function updateQuestionAndScore() {
     document.getElementsByClassName('answer')[2].outerHTML = '';
     document.getElementsByClassName('answer')[1].outerHTML = '';
     document.getElementsByClassName('answer')[0].outerHTML = '';
-    return;
+    return endGame();
   }
   document.getElementsByClassName('score')[0].innerHTML = score;  
   document.getElementsByClassName('question')[0].innerHTML = questions[iQuestion].question;
@@ -64,6 +64,23 @@ function updateQuestionAndScore() {
     answers[i].innerHTML = questions[iQuestion].answers[i].text;
   }
 }
+
+function endGame() {
+  var getscoreEl = document.querySelector('.getScore');
+  getscoreEl.style.visibility ="visible";
+  quizEL.remove();
+}
+
+// var submitEl = document.querySelector(".submit");
+
+
+// submitEl.addEventListener("click", function(event) {
+  //secondsLeft = 60;
+// event.preventDefault;
+//  var scoresEl = document.querySelector(".highScores");
+//  scoresEl.style.visibility = "visible";
+// });
+
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   var answers = document.getElementsByClassName('answer');
@@ -82,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // Selects element by class
 var countEl = document.querySelector(".secondsCount");
-var startEl = document.querySelector(".quizStart")
+var startEl = document.querySelector(".quizStart");
 
 var secondsLeft = 4;
 
@@ -95,6 +112,7 @@ var timerInterval = setInterval(function() {
   if(secondsLeft === 0) {
     // Stops execution of action at set interval
     clearInterval(timerInterval);
+    return endGame();
     // Calls function to fill name in form
     // fillName()
     // correctEl.textContent++;

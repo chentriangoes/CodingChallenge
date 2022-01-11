@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="style.css">
   <title>Coding Quiz Challenge</title>
 </head>
+
 <body>
   <header class="timedScore">
     <h1 class="scoreBoard">View Highscores</h1> <!--View Highscores-->
     <h1 class="showTimer">Time: <span class="secondsCount"></span></h1> <!--Time: 75(s)-->
-</header>
+  </header>
 
 
 <main class="keyContent">
@@ -23,16 +24,33 @@
   
   <section class="quiz">
     <h2 class="question"></h2>
-  <ul>
+ 
     <li><button class="answer"></button></li>
     <li><button class="answer"></button></li>
     <li><button class="answer"></button></li>
     <li><button class="answer"></button></li>
-  </ul>
+  
+  </section>
+
+  <section class="getScore">
+  <h2>All done!</h2>
+  <p><strong>Your Final Score is</strong>: <span class="score"></span>.</p>
+  <form>
+    <label for="initial">Enter Initials</label>
+    <input type="text" id="initials" name="initials">
+    <input class="submit" type="submit" value="Submit">
+  </form>
   </section>
 </main>
 
-  <p><strong>Score</strong>: <span class="score"></span> </p>
+  <footer class="highScores">
+    <h2>Highscores</h2>
+    <ol>
+      <li>Yi-Tsun -- 100</li>
+      <li>Craig -- 50</li>
+    </ol>
+    <button>Go Back</button><button>Clear Highscores</button>
+  </footer>
 
   <script src="script.js"></script>
 </body>
