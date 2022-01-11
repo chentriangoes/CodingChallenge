@@ -51,3 +51,15 @@
     background-color: blueviolet;
     color: white;
 }
+
+.quiz {
+  border-style: dotted;
+  margin-left: 30%;
+  margin-right: 30%;
+  visibility: hidden;
+}
+
+li {
+    list-style-type: none;
+    text-align: left;
+}
