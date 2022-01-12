@@ -50,11 +50,6 @@ var iQuestion = 0;
 
 function updateQuestionAndScore() {
   if (iQuestion >= questions.length) {
-    document.getElementsByClassName('question')[0].outerHTML = '';
-    document.getElementsByClassName('answer')[3].outerHTML = '';
-    document.getElementsByClassName('answer')[2].outerHTML = '';
-    document.getElementsByClassName('answer')[1].outerHTML = '';
-    document.getElementsByClassName('answer')[0].outerHTML = '';
     return endGame();
   }
   document.getElementsByClassName('score')[0].innerHTML = score;  
@@ -65,21 +60,26 @@ function updateQuestionAndScore() {
   }
 }
 
+//Game ended when quiz are all answered or time is exhausted
+//Submission form for user name and score is followed
+
 function endGame() {
   var getscoreEl = document.querySelector('.getScore');
   getscoreEl.style.visibility ="visible";
   quizEL.remove();
 }
 
-// var submitEl = document.querySelector(".submit");
+//Highscores board is displayed after the form for score and username is submitted
+var submitEl = document.querySelector(".submit");
 
+submitEl.addEventListener("click", function() {
+  //secondsLeft = 60 // remove it pls;
+var scoresEl = document.querySelector(".highScores");
+contentEl.remove();
+scoresEl.style.visibility = "visible";
+});
 
-// submitEl.addEventListener("click", function(event) {
-  //secondsLeft = 60;
-// event.preventDefault;
-//  var scoresEl = document.querySelector(".highScores");
-//  scoresEl.style.visibility = "visible";
-// });
+//go back and clear highscores function
 
 
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   for (let i = 0; i < answers.length; i++) {
     answers[i].onclick = function() {
       if (questions[iQuestion].answers[i].isCorrect) {
-        score++;
-      }
+        score = score + 5;
+      } else {secondsLeft = secondsLeft - 10} //not quite sure
       iQuestion++;
       updateQuestionAndScore();
     }
@@ -101,15 +101,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 var countEl = document.querySelector(".secondsCount");
 var startEl = document.querySelector(".quizStart");
 
-var secondsLeft = 4;
+var secondsLeft = 61;
 
+//pls add something for timer not counting down to negative
 function setTime() {
 // Sets interval in variable
-secondsLeft = 4;
+secondsLeft = 61;
 var timerInterval = setInterval(function() {
   secondsLeft--;
   countEl.textContent = secondsLeft;
-  if(secondsLeft === 0) {
+  //Stop timer while no time or question is left
+  if(secondsLeft === 0 || iQuestion >= questions.length) {
     // Stops execution of action at set interval
     clearInterval(timerInterval);
     return endGame();
@@ -123,7 +125,7 @@ var timerInterval = setInterval(function() {
 var titlequizEl = document.querySelector(".titleQuiz");
 var rulechoiceEl = document.querySelector(".ruleChoice"); 
 var quizEL = document.querySelector(".quiz");
-//var contentEl = document.querySelector(".keyContent");
+var contentEl = document.querySelector(".keyContent");
 //var firstliEl = document.createElement("li"); //or "ol" ?
 //var secondliEl = document.createElement("li");
 //var thirdliEl = document.createElement("li");
