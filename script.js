@@ -52,7 +52,7 @@ function updateQuestionAndScore() {
   if (iQuestion >= questions.length) {
     return endGame();
   }
-  document.getElementsByClassName('score')[0].innerHTML = score;  
+  document.getElementsByClassName('finalscore')[0].innerHTML = score;  
   document.getElementsByClassName('question')[0].innerHTML = questions[iQuestion].question;
   var answers = document.getElementsByClassName('answer');
   for (let i = 0; i < answers.length; i++) {
@@ -151,3 +151,19 @@ startEl.addEventListener("click", function() {
   setTime();
   setQuiz();
 });
+
+
+
+submitEl.addEventListener("click", function() {
+  var initial = document.getElementById("initials"); //is null at the moment .value shows not connecting
+  var sentScore = document.querySelector(".finalscore"); //isnull at the mement .value shows not connecting
+  //Save the initial and the score to localStorage and render the last registered user
+  localStorage.setItem("name", initial);
+  localStorage.setItem("score", sentScore);
+});
+
+
+//var counter = document.querySelector(".highScores li[]");
+//var count = localStorage.getItem("score or name");
+
+///counter.textContent = count;
