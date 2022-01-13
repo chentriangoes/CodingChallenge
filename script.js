@@ -49,7 +49,7 @@ var score = 0;
 var iQuestion = 0;
 
 function updateQuestionAndScore() {
-  if (iQuestion >= questions.length) {
+  if (iQuestion > questions.length) {
     return endGame();
   }
   document.getElementsByClassName('finalscore')[0].innerHTML = score;  
@@ -88,7 +88,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     answers[i].onclick = function() {
       if (questions[iQuestion].answers[i].isCorrect) {
         score = score + 5;
-      } else {secondsLeft = secondsLeft - 10} //not quite sure
+        //show answer is corret 
+      } else {secondsLeft = secondsLeft - 10;
+      //show answer is wrong
+      } //not quite sure
       iQuestion++;
       updateQuestionAndScore();
     }
@@ -101,12 +104,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 var countEl = document.querySelector(".secondsCount");
 var startEl = document.querySelector(".quizStart");
 
-var secondsLeft = 61;
+var secondsLeft = 5;
 
 //pls add something for timer not counting down to negative
 function setTime() {
 // Sets interval in variable
-secondsLeft = 61;
+secondsLeft = 5; //double check this and change it to 76 or 75
 var timerInterval = setInterval(function() {
   secondsLeft--;
   countEl.textContent = secondsLeft;
@@ -153,14 +156,53 @@ startEl.addEventListener("click", function() {
 });
 
 
+//function displayItems() {
+//  var l, i;
+//  document.getElementById("demo").innerHTML = "";
+//  for (i = 0; i < localStorage.length; i++) {
+//  x = localStorage.key(i);
+//  document.getElementById("demo").innerHTML += x + "<br>";
+//  }
+//}
+
+var leadersEl = document.querySelector(".leaders");
+var leadersLi = document.createElement("li")
 
 submitEl.addEventListener("click", function() {
   var initial = document.getElementById("initials"); //is null at the moment .value shows not connecting
   var sentScore = document.querySelector(".finalscore"); //isnull at the mement .value shows not connecting
+  leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
   //Save the initial and the score to localStorage and render the last registered user
   localStorage.setItem("name", initial);
   localStorage.setItem("score", sentScore);
 });
+
+
+//clear local storage and remove learders board
+var clearEl = document.querySelector(".clearscore"); 
+
+clearEl.addEventListener("click", function() {
+  localStorage.clear();
+  leadersEl.remove();
+});
+
+//onclick function for returning back to the home page
+var backEl = document.querySelector(".backgame");
+
+backEl.onclick = function() {
+location.href ="file:///Users/yitsun/Desktop/BC/02_Assignments/04_CodingQuiz/CodingChallenge/index.html";
+};
+
+//view highscores
+var headerEl = document.querySelector(".timedScore")
+var highEl = document.querySelector(".highScores")
+var boardEl = document.querySelector(".scoreBoard")
+
+boardEl.onclick = function() {
+  highEl.style.visibility = "visible";
+  headerEl.remove();
+  contentEl.remove();
+  };
 
 
 //var counter = document.querySelector(".highScores li[]");
