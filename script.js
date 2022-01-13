@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 var countEl = document.querySelector(".secondsCount");
 var startEl = document.querySelector(".quizStart");
 
-var secondsLeft = 5;
+var secondsLeft = 5 //double check this and change it to 76 or 75;
 
-//pls add something for timer not counting down to negative
+//***** pls add something for timer not counting down to negative
 function setTime() {
 // Sets interval in variable
 secondsLeft = 5; //double check this and change it to 76 or 75
@@ -118,10 +118,9 @@ var timerInterval = setInterval(function() {
     // Stops execution of action at set interval
     clearInterval(timerInterval);
     return endGame();
-    // Calls function to fill name in form
-    // fillName()
-    // correctEl.textContent++;
-  } 
+  } //else if (secondsLeft < 0) {
+    //secondsLeft = 0;
+  //}
 }, 1000)
 }
 
