@@ -77,3 +77,17 @@ button {
     margin-right: auto;
     visibility:hidden;
 }
+
+.outcome {
+    position:relative;
+    top:10px;
+    margin-left: auto;
+    width:500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: larger;
+    font-style: italic;
+    text-align: left;
+    border-top: 1px solid;
+    visibility:hidden;
+}

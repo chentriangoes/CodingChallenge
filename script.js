@@ -47,13 +47,15 @@ var questions = [
   
 var score = 0;
 var iQuestion = 0;
+var recentScore = document.getElementsByClassName("finalscore")
+var choiceEl = document.getElementsByClassName('choices')
 
 function updateQuestionAndScore() {
   if (iQuestion > questions.length) {
     return endGame();
   }
-  document.getElementsByClassName('finalscore')[0].innerHTML = score;  
-  document.getElementsByClassName('question')[0].innerHTML = questions[iQuestion].question;
+  recentScore[0].innerHTML = score;  
+  choiceEl[0].innerHTML = questions[iQuestion].question;
   var answers = document.getElementsByClassName('answer');
   for (let i = 0; i < answers.length; i++) {
     answers[i].innerHTML = questions[iQuestion].answers[i].text;
@@ -63,9 +65,14 @@ function updateQuestionAndScore() {
 //Game ended when quiz are all answered or time is exhausted
 //Submission form for user name and score is followed
 
+var getscoreEl = document.querySelector('.getScore');
+var outCome = document.querySelector(".outcome"); 
+
 function endGame() {
-  var getscoreEl = document.querySelector('.getScore');
   getscoreEl.style.visibility ="visible";
+  outCome.style.visibility ="visible";
+  outCome.style.top = "155px";
+  outCome.style.left = "95px";
   quizEL.remove();
 }
 
@@ -79,8 +86,6 @@ contentEl.remove();
 scoresEl.style.visibility = "visible";
 });
 
-//go back and clear highscores function
-
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   var answers = document.getElementsByClassName('answer');
@@ -89,8 +94,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       if (questions[iQuestion].answers[i].isCorrect) {
         score = score + 5;
         //show answer is corret 
+        outCome.style.visibility ="visible";
+        outCome.textContent  = "Correct!";
       } else {secondsLeft = secondsLeft - 10;
       //show answer is wrong
+      outCome.style.visibility ="visible";
+      outCome.textContent  = "Incorrect!";
       } //not quite sure
       iQuestion++;
       updateQuestionAndScore();
@@ -100,16 +109,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 
+
+
 // Selects element by class
 var countEl = document.querySelector(".secondsCount");
 var startEl = document.querySelector(".quizStart");
 
-var secondsLeft = 5 //double check this and change it to 76 or 75;
+ var secondsLeft = 10 //double check this and change it to 76 or 75;
 
 //***** pls add something for timer not counting down to negative
 function setTime() {
 // Sets interval in variable
-secondsLeft = 5; //double check this and change it to 76 or 75
+ secondsLeft = 10; //double check this and change it to 76 or 75
 var timerInterval = setInterval(function() {
   secondsLeft--;
   countEl.textContent = secondsLeft;
@@ -164,19 +175,59 @@ startEl.addEventListener("click", function() {
 //  }
 //}
 
+//pls add function for outCome.remove() when placeholder for initials is clicked
+
 var leadersEl = document.querySelector(".leaders");
 var leadersLi = document.createElement("li")
 
 submitEl.addEventListener("click", function() {
-  var initial = document.getElementById("initials"); //is null at the moment .value shows not connecting
-  var sentScore = document.querySelector(".finalscore"); //isnull at the mement .value shows not connecting
+  var initial = document.querySelector("#initials"); //is null at the moment .value shows not connecting
+  var savedScore = recentScore.value; //isnull at the mement .value shows not connecting
   leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
   //Save the initial and the score to localStorage and render the last registered user
-  localStorage.setItem("name", initial);
-  localStorage.setItem("score", sentScore);
+  localStorage.setItem("name", initial); //[]
+  localStorage.setItem("score", savedScore); //[]
 });
 
 
+//JSON.stringify([])
+//JSON.parse(localStorage.getItem("score"))
+
+//var topScores = JSON.parse(localStrorage.getItem("score")) || [];
+//var max_high_scores = 5;
+
+
+//saveHighScore = e => {
+//e.preventDefault();
+
+//var nameScore = {
+//  score: localStorage.getItem("score"),
+//  name: initial.value,
+// };
+//topScores.push(nameScore);
+//topScores.sort((a,b)=>b.score - a.score)
+//topScores.splice(5);
+
+//localStorage.setItem("score", JSON.stringify(topScores));
+//window.location.assign('/');
+//};
+
+
+//get top scores
+//var highEl = document.querySelector(".highScores"); **remove this pls
+//var topScores = JSON.parse(localStrorage.getItem("score")) || []; remove this pls
+
+
+//highEl.innerHTML = topScores
+//.map(outcomes => {                      
+// return '<li class="top-score">${outcomes.name} - ${outcomes.score}</li>';
+//})
+//.join("");
+
+
+
+
+//score
 //clear local storage and remove learders board
 var clearEl = document.querySelector(".clearscore"); 
 
@@ -189,7 +240,7 @@ clearEl.addEventListener("click", function() {
 var backEl = document.querySelector(".backgame");
 
 backEl.onclick = function() {
-location.href ="file:///Users/yitsun/Desktop/BC/02_Assignments/04_CodingQuiz/CodingChallenge/index.html";
+location.href ="file:///Users/yitsun/Desktop/BC/02_Assignments/04_CodingQuiz/CodingChallenge/index.html"; //change this please
 };
 
 //view highscores
