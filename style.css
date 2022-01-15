@@ -3,6 +3,7 @@
     font-family: 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'sans-serif';
 }
 
+/* Styled Highscores and Timer */
 .timedScore {
     display: inline-block;
     width: 100vw;
@@ -21,13 +22,13 @@
     cursor: pointer;
 }
 
-
 .showTimer {
     font-size: 20px;
     width: 7%;
     float: right;
 }
 
+/* Styled Quiz, Answers and Scores Submission */
 .keyContent {
    width: 100vw;
    text-align: center;
@@ -63,21 +64,6 @@ button {
     text-align: left;
 }
 
-.getScore {
-    text-align: left;
-    width:fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    visibility:hidden;
-}
-
-.highScores {
-    width:fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    visibility:hidden;
-}
-
 .outcome {
     position:relative;
     top:10px;
@@ -89,5 +75,21 @@ button {
     font-style: italic;
     text-align: left;
     border-top: 1px solid;
+    visibility:hidden;
+}
+
+.getScore {
+    text-align: left;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    visibility:hidden;
+}
+
+/* Styled Highscores */
+.highScores {
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
     visibility:hidden;
 }

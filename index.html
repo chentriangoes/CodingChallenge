@@ -9,51 +9,49 @@
 </head>
 
 <body>
+  <!--View Highscores and Timer-->
   <header class="timedScore">
-    <h1 class="scoreBoard">View Highscores</h1> <!--View Highscores-->
-    <h1 class="showTimer">Time: <span class="secondsCount"></span></h1> <!--Time: 75(s)-->
+    <h1 class="scoreBoard">View Highscores</h1>
+    <h1 class="showTimer">Time: <span class="secondsCount">75</span></h1>
   </header>
 
-
-<main class="keyContent">
-  <h3 class="titleQuiz">Coding Quiz Challenge</h3>
-  <p class="ruleChoice">Try to answer the following code-related questions within 
+  <!--Quiz, Answers and Scores Submission-->
+  <main class="keyContent">
+      <h3 class="titleQuiz">Coding Quiz Challenge</h3>
+      <p class="ruleChoice">Try to answer the following code-related questions within 
       the time</br>limit. Keep in mind that incorrect answers will penalize your 
       score/time</br>by ten seconds!</p>
-  <button class="quizStart">Start Quiz</button>
+      <button class="quizStart">Start Quiz</button>
   
-  <section class="quiz">
-    <h2 class="choices"></h2>
- 
-    <li><button class="answer"></button></li>
-    <li><button class="answer"></button></li>
-    <li><button class="answer"></button></li>
-    <li><button class="answer"></button></li>
-  
-  </section>
+   <section class="quiz">
+       <h2 class="choices"></h2>
 
+       <li><button class="answer"></button></li>
+       <li><button class="answer"></button></li>
+       <li><button class="answer"></button></li>
+       <li><button class="answer"></button></li>
+   </section>
 
-  <section class="outcome"></section>
+   <section class="outcome"></section>
 
-  <section class="getScore">
-  <h2>All done!</h2>
-  <p><strong>Your Final Score is</strong>: <span class="finalscore"></span>.</p>
-  <form>
-    <label for="initial">Enter Initials</label>
-    <input type="text" id="initials" name="initials">
-    <input class="submit" type="submit" value="Submit"> <!--Review it-->
-  </form>
-  </section>
+   <section class="getScore">
+     <h2>All done!</h2>
+     <p><strong>Your Final Score is</strong>: <span class="finalscore"></span>.</p>
+     <form>
+       <label for="initial">Enter Initials</label>
+       <input type="text" id="initials" name="initials" placeholder="initials">
+       <input class="submit" type="submit" value="Submit"> <!--Review it-->
+     </form>
+   </section>
+  </main>
 
-  
-</main>
-
+  <!--Highscores-->
   <footer class="highScores">
-    <h2>Highscores</h2>
-    <ol class="leaders">
-      <li>Yi-Tsun -- 100</li> <!--remove this pls-->
-    </ol>
-    <button class="backgame" type="submit">Go Back</button><button class="clearscore" type="submit">Clear Highscores</button>
+     <h2>Highscores</h2>
+     <ol class="leaders">
+       <li>Yi-Tsun -- 100</li> <!--remove this pls-->
+     </ol>
+     <button class="backgame" type="submit">Go Back</button><button class="clearscore" type="submit">Clear Highscores</button>
   </footer>
 
   <script src="script.js"></script>

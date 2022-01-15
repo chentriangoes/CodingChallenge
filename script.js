@@ -1,3 +1,4 @@
+//set the variable "questions" as an array holding objests of 5 questions
 var questions = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -44,13 +45,15 @@ var questions = [
       {text: "4. console.log", isCorrect: true}
     ]
   }]
-  
+
+//Question and Score Update
 var score = 0;
 var iQuestion = 0;
-var recentScore = document.getElementsByClassName("finalscore")
-var choiceEl = document.getElementsByClassName('choices')
+var recentScore = document.getElementsByClassName("finalscore");
+var choiceEl = document.getElementsByClassName('choices');
 
 function updateQuestionAndScore() {
+  //Game ended when the number of questions is over 5
   if (iQuestion > questions.length) {
     return endGame();
   }
@@ -62,9 +65,29 @@ function updateQuestionAndScore() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+  var answers = document.getElementsByClassName('answer');
+  for (let i = 0; i < answers.length; i++) {
+    answers[i].onclick = function() {
+      //show correct answer responses including get 5 point and its message 
+      if (questions[iQuestion].answers[i].isCorrect) {
+        score = score + 5;
+        outCome.style.visibility ="visible";
+        outCome.textContent  = "Correct!";
+      //show incorrect answer responses including get the penalty of 10 seconds deduction and its message 
+      } else {secondsLeft = secondsLeft - 10;
+      outCome.style.visibility ="visible";
+      outCome.textContent  = "Incorrect!";
+      }
+      iQuestion++;
+      updateQuestionAndScore();
+    }
+  }
+  updateQuestionAndScore();
+});
+
 //Game ended when quiz are all answered or time is exhausted
 //Submission form for user name and score is followed
-
 var getscoreEl = document.querySelector('.getScore');
 var outCome = document.querySelector(".outcome"); 
 
@@ -80,113 +103,69 @@ function endGame() {
 var submitEl = document.querySelector(".submit");
 
 submitEl.addEventListener("click", function() {
-  //secondsLeft = 60 // remove it pls;
 var scoresEl = document.querySelector(".highScores");
 contentEl.remove();
 scoresEl.style.visibility = "visible";
 });
 
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-  var answers = document.getElementsByClassName('answer');
-  for (let i = 0; i < answers.length; i++) {
-    answers[i].onclick = function() {
-      if (questions[iQuestion].answers[i].isCorrect) {
-        score = score + 5;
-        //show answer is corret 
-        outCome.style.visibility ="visible";
-        outCome.textContent  = "Correct!";
-      } else {secondsLeft = secondsLeft - 10;
-      //show answer is wrong
-      outCome.style.visibility ="visible";
-      outCome.textContent  = "Incorrect!";
-      } //not quite sure
-      iQuestion++;
-      updateQuestionAndScore();
-    }
-  }
-  updateQuestionAndScore();
-});
-
-
-
-
-// Selects element by class
+//Set Timer
 var countEl = document.querySelector(".secondsCount");
 var startEl = document.querySelector(".quizStart");
+var secondsLeft;
 
- var secondsLeft = 10 //double check this and change it to 76 or 75;
-
-//***** pls add something for timer not counting down to negative
 function setTime() {
-// Sets interval in variable
- secondsLeft = 10; //double check this and change it to 76 or 75
+ secondsLeft = "75"; //double check this and change it to 76 or 75
 var timerInterval = setInterval(function() {
   secondsLeft--;
   countEl.textContent = secondsLeft;
   //Stop timer while no time or question is left
   if(secondsLeft === 0 || iQuestion >= questions.length) {
-    // Stops execution of action at set interval
+  //Stop execution of action at set interval
     clearInterval(timerInterval);
     return endGame();
-  } //else if (secondsLeft < 0) {
-    //secondsLeft = 0;
-  //}
+  //Timer displays as "0" when the deducted timer would become nagive 
+  } else if (secondsLeft < 0) {
+    countEl.textContent = "0";
+    return endGame();
+  }
 }, 1000)
 }
 
+//Start quiz and timer function
 var titlequizEl = document.querySelector(".titleQuiz");
 var rulechoiceEl = document.querySelector(".ruleChoice"); 
 var quizEL = document.querySelector(".quiz");
 var contentEl = document.querySelector(".keyContent");
-//var firstliEl = document.createElement("li"); //or "ol" ?
-//var secondliEl = document.createElement("li");
-//var thirdliEl = document.createElement("li");
-//var fourthliEl = document.createElement("li");
-//var firstbtnEl = document.createElement("button"); //or "ol" ?
-//var secondbtnEl = document.createElement("button");
-//var thirdbtnEl = document.createElement("button");
-//var fourthbtnEl = document.createElement("button");
-//var chosenAnswer = document.createElement("p");
-
 
 function setQuiz() {
-  // remove title and game rule
+  // remove game introduction page and start quiz button
   titlequizEl.remove();
   rulechoiceEl.remove();
   startEl.remove();
   quizEL.style.visibility = "visible";
 }
 
-
 startEl.addEventListener("click", function() {
-  //secondsLeft = 60;
   setTime();
   setQuiz();
 });
 
-
-//function displayItems() {
-//  var l, i;
-//  document.getElementById("demo").innerHTML = "";
-//  for (i = 0; i < localStorage.length; i++) {
-//  x = localStorage.key(i);
-//  document.getElementById("demo").innerHTML += x + "<br>";
-//  }
-//}
-
-//pls add function for outCome.remove() when placeholder for initials is clicked
-
+//Enter intitals function for local storage of scores and initials
 var leadersEl = document.querySelector(".leaders");
 var leadersLi = document.createElement("li")
+var initialEl = document.getElementById("initials");
 
 submitEl.addEventListener("click", function() {
-  var initial = document.querySelector("#initials"); //is null at the moment .value shows not connecting
+  var initial = initialEl.value;   //is null at the moment .value shows not connecting
   var savedScore = recentScore.value; //isnull at the mement .value shows not connecting
   leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
   //Save the initial and the score to localStorage and render the last registered user
   localStorage.setItem("name", initial); //[]
   localStorage.setItem("score", savedScore); //[]
+});
+
+initialEl.addEventListener("click", function() {
+  outCome.remove();
 });
 
 
@@ -195,7 +174,6 @@ submitEl.addEventListener("click", function() {
 
 //var topScores = JSON.parse(localStrorage.getItem("score")) || [];
 //var max_high_scores = 5;
-
 
 //saveHighScore = e => {
 //e.preventDefault();
@@ -212,11 +190,9 @@ submitEl.addEventListener("click", function() {
 //window.location.assign('/');
 //};
 
-
 //get top scores
 //var highEl = document.querySelector(".highScores"); **remove this pls
 //var topScores = JSON.parse(localStrorage.getItem("score")) || []; remove this pls
-
 
 //highEl.innerHTML = topScores
 //.map(outcomes => {                      
@@ -224,11 +200,22 @@ submitEl.addEventListener("click", function() {
 //})
 //.join("");
 
+//function displayItems() {
+//  var l, i;
+//  document.getElementById("demo").innerHTML = "";
+//  for (i = 0; i < localStorage.length; i++) {
+//  x = localStorage.key(i);
+//  document.getElementById("demo").innerHTML += x + "<br>";
+//  }
+//}
 
+//var counter = document.querySelector(".highScores li[]");
+//var count = localStorage.getItem("score or name");
 
+///counter.textContent = count;
 
-//score
-//clear local storage and remove learders board
+//Highscores
+//Clear local storage and remove learders board
 var clearEl = document.querySelector(".clearscore"); 
 
 clearEl.addEventListener("click", function() {
@@ -253,9 +240,3 @@ boardEl.onclick = function() {
   headerEl.remove();
   contentEl.remove();
   };
-
-
-//var counter = document.querySelector(".highScores li[]");
-//var count = localStorage.getItem("score or name");
-
-///counter.textContent = count;
