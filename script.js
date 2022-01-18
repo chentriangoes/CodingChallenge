@@ -154,14 +154,15 @@ startEl.addEventListener("click", function() {
 var leadersEl = document.querySelector(".leaders");
 var leadersLi = document.createElement("li")
 var initialEl = document.getElementById("initials");
+var test = document.querySelector(".finalscore");
 
 submitEl.addEventListener("click", function() {
-  var initial = initialEl.value;   //is null at the moment .value shows not connecting
-  var savedScore = recentScore.value; //isnull at the mement .value shows not connecting
-  leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
+  var initial = initialEl.value;   
+  var savedScore = test.textContent; //is undefined at the mement .value shows not connecting
   //Save the initial and the score to localStorage and render the last registered user
   localStorage.setItem("name", initial); //[]
   localStorage.setItem("score", savedScore); //[]
+  leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
 });
 
 initialEl.addEventListener("click", function() {
