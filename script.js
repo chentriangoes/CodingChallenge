@@ -213,7 +213,7 @@ clearEl.addEventListener("click", function() {
 var backEl = document.querySelector(".backgame");
 
 backEl.onclick = function() {
-location.href ="file:///Users/yitsun/Desktop/BC/02_Assignments/04_CodingQuiz/CodingChallenge/index.html"; //change this please
+location.href ="https://chentriangoes.github.io/CodingChallenge/";
 };
 
 //view highscores
