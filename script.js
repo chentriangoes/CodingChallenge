@@ -152,68 +152,53 @@ startEl.addEventListener("click", function() {
 
 //Enter intitals function for local storage of scores and initials
 var leadersEl = document.querySelector(".leaders");
-var leadersLi = document.createElement("li")
 var initialEl = document.getElementById("initials");
 var test = document.querySelector(".finalscore");
+var mostRecentScore = localStorage.getItem("mostRecentScore");
+
+var savedHighscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+var Max_High_SCORES = 5;
 
 submitEl.addEventListener("click", function() {
-  var initial = initialEl.value;   
-  var savedScore = test.textContent; //is undefined at the mement .value shows not connecting
-  //Save the initial and the score to localStorage and render the last registered user
-  localStorage.setItem("name", initial); //[]
-  localStorage.setItem("score", savedScore); //[]
-  leadersEl.appendChild(leadersLi).textContent = localStorage.getItem("name") + " -- " + localStorage.getItem("score");
-});
+  mostRecentScore = test.innerText;
+    
+    var currentUser = initialEl.value.trim();
+    
+    var currentHighscore = {
+      name: currentUser,
+      score: mostRecentScore
+    };
 
-initialEl.addEventListener("click", function() {
-  outCome.remove();
-});
+    savedHighscores.push(currentHighscore);
+    savedHighscores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    savedHighscores.splice(5);
 
+    localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
+    printHighscores();
+  });
 
-//JSON.stringify([])
-//JSON.parse(localStorage.getItem("score"))
-
-//var topScores = JSON.parse(localStrorage.getItem("score")) || [];
-//var max_high_scores = 5;
-
-//saveHighScore = e => {
-//e.preventDefault();
-
-//var nameScore = {
-//  score: localStorage.getItem("score"),
-//  name: initial.value,
-// };
-//topScores.push(nameScore);
-//topScores.sort((a,b)=>b.score - a.score)
-//topScores.splice(5);
-
-//localStorage.setItem("score", JSON.stringify(topScores));
-//window.location.assign('/');
-//};
-
-//get top scores
-//var highEl = document.querySelector(".highScores"); **remove this pls
-//var topScores = JSON.parse(localStrorage.getItem("score")) || []; remove this pls
-
-//highEl.innerHTML = topScores
-//.map(outcomes => {                      
-// return '<li class="top-score">${outcomes.name} - ${outcomes.score}</li>';
-//})
-//.join("");
-
-//function displayItems() {
-//  var l, i;
-//  document.getElementById("demo").innerHTML = "";
-//  for (i = 0; i < localStorage.length; i++) {
-//  x = localStorage.key(i);
-//  document.getElementById("demo").innerHTML += x + "<br>";
-//  }
-//}
-
-//var counter = document.querySelector(".highScores li[]");
-//var count = localStorage.getItem("score or name");
-
-///counter.textContent = count;
+function printHighscores(){
+  // create li tag for 5 top scores
+  var firstPlace = document.createElement("li");
+  var secondPlace = document.createElement("li");
+  var thirdPlace = document.createElement("li");
+  var fourthPlace = document.createElement("li");
+  var fifthPlace = document.createElement("li");
+  //append child to the highscores
+  leadersEl.appendChild(firstPlace);
+  leadersEl.appendChild(secondPlace);
+  leadersEl.appendChild(thirdPlace);
+  leadersEl.appendChild(fourthPlace);
+  leadersEl.appendChild(fifthPlace);
+  // display available top 5 scores with names on the page
+  firstPlace.textContent = savedHighscores[0].name + " -- " + savedHighscores[0].score;
+  secondPlace.textContent = savedHighscores[1].name + " -- " + savedHighscores[1].score;
+  thirdPlace.textContent = savedHighscores[2].name + " -- " + savedHighscores[2].score;
+  fourthPlace.textContent = savedHighscores[3].name + " -- " + savedHighscores[3].score;
+  fifthPlace.textContent = savedHighscores[4].name + " -- " + savedHighscores[4].score;
+};
 
 //Highscores
 //Clear local storage and remove learders board
